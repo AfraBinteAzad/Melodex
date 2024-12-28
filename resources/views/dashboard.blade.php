@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -118,6 +119,24 @@
             color: #999;
             margin-top: 20px;
         }
+
+        .profile-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 25px;
+            color: #66128e;
+            background-color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            z-index: 1;
+        }
+
+        .profile-icon:hover {
+            background-color: #be7fdb;
+        }
     </style>
 </head>
 <body>
@@ -134,14 +153,20 @@
             <button type="submit">Search</button>
         </form>
 
+        
+        <a href="{{ route('songslist') }}"> 
+            <button class="go-premium-btn">List ALL</button>
+        </a>
+
+        <a href="{{ route('subscription') }}">
+            <button class="go-premium-btn">Wanna Go Premium?</button>
+        </a>
+
         <form action="/logout" method="POST">
             @csrf
             <button type="submit">Logout</button>
         </form>
         
-        <a href="{{ route('subscription') }}">
-            <button class="go-premium-btn">Wanna Go Premium?</button>
-        </a>
 
         @if(isset($results))
         <div class="results">
@@ -171,5 +196,8 @@
         </div>
         @endif
     </div>
+    <a href="{{ route('profile') }}" class="profile-icon">
+        <i class="fas fa-user"></i>
+    </a>
 </body>
 </html>

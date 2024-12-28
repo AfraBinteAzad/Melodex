@@ -82,6 +82,9 @@
         <a href="{{ route('login') }}" style="display: block;">
             <button>Login</button>
         </a>
+        <a href="{{ route('admin.login') }}" style="display: block;">
+            <button>Admin</button>
+        </a>
     </div>
 </body>
 </html>
