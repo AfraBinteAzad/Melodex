@@ -1,8 +1,9 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Login</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +15,6 @@
             overflow: hidden;
         }
 
-        
         video {
             position: fixed;
             top: 0;
@@ -36,12 +36,12 @@
             z-index: 1; 
         }
 
-        h2 {
+        h1 {
             margin-bottom: 20px;
         }
 
         input {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ccc;
@@ -49,53 +49,61 @@
         }
 
         button {
-            width: 100%;
+            width: 90%;
             padding: 10px;
             background-color: #66128e;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
         button:hover {
             background-color: #be7fdb;
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
         a {
             text-decoration: none;
+            color: #66128e;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #be7fdb;
         }
     </style>
 </head>
 <body>
     <video autoplay muted loop>
         <source src="{{ asset('videos/purple.mp4') }}" type="video/mp4">
-           
+        Your browser does not support the video tag or the file is missing.
     </video>
-    @auth
-     <h1>Welcome to the dashboard!!!</h1> 
-        <form action="logout", method="POST">
-            @csrf
-            <button type="submit">Log Out</button>
-         </form>
-        
-     
+    @auth('admin')
+        <div class="container">
+            <h1>Welcome, Admin!</h1>
+            <form action="{{ route('admin.logout') }}" method="POST">
+                @csrf
+                <button type="submit">Log Out</button>
+            </form>
+        </div>
     @else
-    <div class="container">
-        <h1>Registration Form</h1>
-        <form action="/registersubmit" method="POST">
-                 @csrf
-                 <input type="text" name="name" placeholder="Name" required>
-                 <input type="email" name="email" placeholder="Email" required>
-                 <input type="password" name="password" placeholder="Password" required>
-                 <input type="password" name="password_confirmation" placeholder="Confirm Password" required>           
-                <button type="submit" class="back-button">Register</button>        
-        </form>
+        <div class="container">
+            <h1>Admin Login</h1>
+            <form action="{{ route('admin.login.submit') }}" method="POST">
+                @csrf
+                <input type="email" name="email" placeholder="Email" required value="{{ old('email') }}">
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Log In</button>
+                
+            </form>
+            <a href="{{ route('opening') }}" style="display: block;">
+                <br>
+            <button>Dashboard</button>
+            </a>
         </div>
     @endauth
-
-
-
 </body>
 </html>

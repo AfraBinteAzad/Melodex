@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,13 +9,11 @@
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            background-color: #f2f2f2; 
         }
 
         video {
@@ -26,64 +23,50 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            z-index: -1;
+            z-index: -1; 
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.8); 
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 1000px; 
+            max-width: 400px;
             text-align: center;
-            z-index: 1;
+            z-index: 1; 
         }
 
         h1 {
+            font-size: 24px;
             margin-bottom: 20px;
         }
 
-        .package-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 20px; 
-            flex-wrap: wrap; 
-        }
-
-        .package {
-            background-color: #fff;
-            border-radius: 8px;
-            padding: 20px;
-            width: 280px; 
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .package:hover {
-            transform: translateY(-10px); 
-        }
-
-        .package h3 {
-            margin: 10px 0;
-        }
-
-        .sub-btn {
+        button {
+            width: 100%;
+            padding: 10px;
             background-color: #66128e;
             color: white;
-            padding: 10px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            text-transform: uppercase;
-            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .sub-btn:hover {
+        button:hover {
             background-color: #be7fdb;
+            transform: translateY(-5px);
         }
-        
+
+        a {
+            text-decoration: none;
+            margin-bottom: 10px;
+        }
+
+        .back-button:hover {
+            background-color: #be7fdb;
+            transform: translateY(-10px);
+        }
         .dash-icon {
             position: fixed;
             top: 20px;
@@ -105,27 +88,12 @@
 <body>
     <video autoplay muted loop>
         <source src="{{ asset('videos/purple.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag or the file is missing.
     </video>
-
     <div class="container">
-        <h1>Subscription Packages</h1>
-
-        @if(count($packages) > 0)
-            <div class="package-container">
-                @foreach($packages as $package)
-                    <div class="package">
-                        <h3>{{ $package->Name }}</h3>
-                        <p class="monthly rate">৳ {{ $package->Rate }}/month</p>
-                        <p class="description">{{ $package->Description }}</p>
-                        <button class="sub-btn">Subscribe</button>
-                    </div>
-                @endforeach
-            </div>
-        @else
-            <p>No subscription packages available at the moment.</p>
-        @endif
+        <h1>Welcome to Your Profile, {{ auth()->user()->name }}!</h1>
+    <p>This is your profile page.</p>
     </div>
-    
     <a href="{{ route('dashboard') }}" class="dash-icon">
         <i class="fas fa-home"></i>
     </a>

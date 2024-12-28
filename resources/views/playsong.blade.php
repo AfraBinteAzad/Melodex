@@ -1,4 +1,11 @@
+<!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Melodex</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,11 +36,6 @@
             max-width: 400px;
             text-align: center;
             z-index: 1; 
-        }
-
-        .back-button:hover {
-            background-color: #be7fdb;
-            transform: translateY(-10px);
         }
 
         h1 {
@@ -69,25 +71,31 @@
             background-color: #be7fdb;
         }
 
-        audio {
-            outline: none;
-            margin-top: 20px;
+        .home-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            color: #66128e;
+            background-color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-icon:hover {
+            background-color: #be7fdb;
         }
     </style>
 </head>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Melodex</title>
-</head>
 
 <body>
-    
+    <video autoplay muted loop>
+        <source src="{{ asset('videos/purple.mp4') }}" type="video/mp4">      
+    </video>
+
     <div class="container">
-        <video autoplay muted loop>
-            <source src="{{ asset('videos/purple.mp4') }}" type="video/mp4">      
-        </video>
         <h1>Now Playing: {{ $song->Song }}</h1>
         <h2>Artist: {{ $song->Artist }}</h2>
         <h3>Album: {{ $song->Album }}</h3>
@@ -95,10 +103,10 @@
         <audio controls>
             <source src="{{ asset('storage/' . $song->mp3_file) }}" type="audio/mp3">
         </audio>
-        
-        <br><br>
-        <a href="{{ route('dashboard') }}" class="back-button">Back to Dashboard</a>
     </div>
 
+    <a href="{{ route('dashboard') }}" class="home-icon">
+        <i class="fas fa-home"></i>
+    </a>
 </body>
 </html>
